@@ -65,7 +65,7 @@ class SearchPage extends GetView<SearchController> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
+                            padding: const EdgeInsets.fromLTRB(32, 0, 32, 8),
                             child: TabBar(
                               tabs: const [
                                 Tab(text: 'users'),
@@ -89,10 +89,32 @@ class SearchPage extends GetView<SearchController> {
                                 itemBuilder: (BuildContext context, int index) {
                                   SearchUserModel user =
                                       c.searchResults.value.users[index];
-                                  return ListTile(
-                                    title: Text(user.username),
-                                    subtitle: Text(user.fullName),
-                                    // leading: Image.network(user.profilePicUrl),
+                                  return Padding(
+                                    padding: const EdgeInsets.only(bottom: 8),
+                                    child: Container(
+                                      decoration: const BoxDecoration(
+                                        border: Border(
+                                          top: BorderSide(
+                                            width: 2.0,
+                                          ),
+                                          bottom: BorderSide(
+                                            width: 2.0,
+                                          ),
+                                        ),
+                                      ),
+                                      child: ListTile(
+                                        title: Text(user.username),
+                                        subtitle: Text(user.fullName),
+                                        // leading: Image.network(user.profilePicUrl),
+                                        tileColor: Colors.black12,
+
+                                        onTap: () {},
+
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(32)),
+                                      ),
+                                    ),
                                   );
                                 },
                               ),
