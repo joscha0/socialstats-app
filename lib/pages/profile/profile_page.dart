@@ -208,32 +208,7 @@ class _VideosTabState extends State<VideosTab>
                   borderRadius: BorderRadius.circular(0)),
               child: Row(
                 children: [
-                  Expanded(
-                      child: FutureBuilder(
-                          future: widget.c.loadVideo(video.mediaUrl),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<ChewieController> snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            }
-                            if (snapshot.error == null) {
-                              return SizedBox(
-                                height: 200,
-                                child: Chewie(
-                                  controller: snapshot.data ??
-                                      ChewieController(
-                                          videoPlayerController:
-                                              VideoPlayerController.network(
-                                                  '')),
-                                ),
-                              );
-                            } else {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            }
-                          })),
+                  Expanded(child: MyVideoPlayer(video: video, index: index)),
                   Expanded(
                     child: Column(
                       children: [
@@ -259,4 +234,57 @@ class _VideosTabState extends State<VideosTab>
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class MyVideoPlayer extends GetWidget {
+  const MyVideoPlayer({
+    Key? key,
+    required this.video,
+    required this.index,
+  }) : super(key: key);
+
+  final VideoModel video;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return GetX<ProfileController>(
+        init: ProfileController(),
+        builder: (c) {
+          if (c.videosLoaded.value[index]) {
+            return FutureBuilder(
+                future: c.loadVideo(video.mediaUrl),
+                builder: (BuildContext context,
+                    AsyncSnapshot<ChewieController> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.error == null) {
+                    return SizedBox(
+                      height: 200,
+                      child: Chewie(
+                        controller: snapshot.data ??
+                            ChewieController(
+                                videoPlayerController:
+                                    VideoPlayerController.network('')),
+                      ),
+                    );
+                  } else {
+                    return const SizedBox(
+                        height: 200,
+                        child: Center(child: CircularProgressIndicator()));
+                  }
+                });
+          } else {
+            return SizedBox(
+              height: 200,
+              child: IconButton(
+                  onPressed: () {
+                    c.loadVideoIndex(index);
+                  },
+                  icon: Image.network(video.previewImgUrl)),
+            );
+          }
+        });
+  }
 }
