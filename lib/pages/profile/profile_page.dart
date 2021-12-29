@@ -158,7 +158,6 @@ class _ImagesTabState extends State<ImagesTab>
                   Expanded(
                     child: Column(
                       children: [
-                        Text(image.title),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -238,7 +237,6 @@ class _VideosTabState extends State<VideosTab>
                   Expanded(
                     child: Column(
                       children: [
-                        Text(video.title),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

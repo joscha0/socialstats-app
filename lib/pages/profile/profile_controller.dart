@@ -19,7 +19,6 @@ class ProfileController extends GetxController {
         ImageModel(
             mediaUrl:
                 "https://scontent-muc2-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/269929586_1057406471761748_7922553736794719620_n.jpg?_nc_ht=scontent-muc2-1.cdninstagram.com&_nc_cat=108&_nc_ohc=ZsLZB99rf7IAX8MxD8d&edm=ABfd0MgBAAAA&ccb=7-4&oh=00_AT8-rWmq_Ah5iGxgbbiV_r8sPTjXTlcFwcjrbVPd-ZbgcA&oe=61D410B0&_nc_sid=7bff83",
-            title: "title",
             caption: "caption",
             datePosted: "datePosted",
             likeCount: 123,
@@ -29,7 +28,6 @@ class ProfileController extends GetxController {
         VideoModel(
           mediaUrl:
               "https://scontent.cdninstagram.com/v/t50.2886-16/269963940_167078088960882_2382964492111403783_n.mp4?_nc_ht=scontent-muc2-1.cdninstagram.com&_nc_cat=106&_nc_ohc=_qyZl6-5jsMAX_sOhXF&tn=XqfqS9R8NKUacHO8&edm=ABfd0MgBAAAA&ccb=7-4&oe=61CE9E0A&oh=00_AT_4UL9hEdLq29tlX_UWJavu8rbS3_dlS9srw9KucFAB5w&_nc_sid=7bff83",
-          title: "title",
           caption: "caption",
           datePosted: "datePosted",
           likeCount: 123,
@@ -39,7 +37,6 @@ class ProfileController extends GetxController {
         VideoModel(
           mediaUrl:
               "https://scontent.cdninstagram.com/v/t50.2886-16/269963940_167078088960882_2382964492111403783_n.mp4?_nc_ht=scontent-muc2-1.cdninstagram.com&_nc_cat=106&_nc_ohc=_qyZl6-5jsMAX_sOhXF&tn=XqfqS9R8NKUacHO8&edm=ABfd0MgBAAAA&ccb=7-4&oe=61CE9E0A&oh=00_AT_4UL9hEdLq29tlX_UWJavu8rbS3_dlS9srw9KucFAB5w&_nc_sid=7bff83",
-          title: "title",
           caption: "caption",
           datePosted: "datePosted",
           likeCount: 123,
@@ -49,7 +46,6 @@ class ProfileController extends GetxController {
       ]).obs;
 
   TextEditingController usernameController = TextEditingController();
-  RxString test = 'test'.obs;
 
   List<VideoPlayerController> _videoControllers = [];
   List<ChewieController> _chewieControllers = [];
@@ -69,7 +65,7 @@ class ProfileController extends GetxController {
     }
   }
 
-  void openProfile() {
+  void openProfile() async {
     closeVideoControllers();
   }
 

@@ -74,7 +74,6 @@ class ProfileModel {
 
 class MediaModel {
   late String mediaUrl;
-  late String title;
   late String caption;
   late String datePosted;
   late int likeCount;
@@ -82,7 +81,6 @@ class MediaModel {
 
   MediaModel({
     required this.mediaUrl,
-    required this.title,
     required this.caption,
     required this.datePosted,
     required this.likeCount,
@@ -93,14 +91,12 @@ class MediaModel {
 class ImageModel extends MediaModel {
   ImageModel({
     required mediaUrl,
-    required title,
     required caption,
     required datePosted,
     required likeCount,
     required commentCount,
   }) : super(
           mediaUrl: mediaUrl,
-          title: title,
           caption: caption,
           datePosted: datePosted,
           likeCount: likeCount,
@@ -113,7 +109,6 @@ class VideoModel extends MediaModel {
 
   VideoModel(
       {required mediaUrl,
-      required title,
       required caption,
       required datePosted,
       required likeCount,
@@ -121,7 +116,6 @@ class VideoModel extends MediaModel {
       required this.views})
       : super(
           mediaUrl: mediaUrl,
-          title: title,
           caption: caption,
           datePosted: datePosted,
           likeCount: likeCount,
