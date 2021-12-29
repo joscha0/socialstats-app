@@ -21,20 +21,26 @@ class HomePage extends GetView<HomeController> {
                 ProfileTab(),
               ],
             ),
-            bottomNavigationBar: BottomNavigationBar(
-              onTap: (value) => c.switchTab(value),
-              currentIndex: c.tabIndex.value,
-              backgroundColor: Colors.black,
-              selectedItemColor: Colors.white,
-              unselectedItemColor: Colors.white70,
-              selectedIconTheme: const IconThemeData(opacity: 0.0, size: 0),
-              unselectedIconTheme: const IconThemeData(opacity: 0.0, size: 0),
-              selectedFontSize: 24,
-              unselectedFontSize: 22,
-              items: [
-                _bottomNavigationBarItem('search'),
-                _bottomNavigationBarItem('profile')
-              ],
+            bottomNavigationBar: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(32.0),
+                topRight: Radius.circular(32.0),
+              ),
+              child: BottomNavigationBar(
+                onTap: (value) => c.switchTab(value),
+                currentIndex: c.tabIndex.value,
+                backgroundColor: Colors.black,
+                selectedItemColor: Colors.white,
+                unselectedItemColor: Colors.white70,
+                selectedIconTheme: const IconThemeData(opacity: 0.0, size: 0),
+                unselectedIconTheme: const IconThemeData(opacity: 0.0, size: 0),
+                selectedFontSize: 24,
+                unselectedFontSize: 22,
+                items: [
+                  _bottomNavigationBarItem('search'),
+                  _bottomNavigationBarItem('profile')
+                ],
+              ),
             ),
           );
         });
