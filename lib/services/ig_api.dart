@@ -3,14 +3,57 @@ import 'dart:developer';
 import 'dart:math' as math;
 import 'package:http/http.dart' as http;
 import 'package:igstats/services/models.dart';
+import 'package:intl/intl.dart';
 
 String baseUrl = 'https://www.instagram.com/';
 
-Future<Map<String, dynamic>> getProfileData(String username) async {
+Future<ProfileModel> getProfileData(String username) async {
   String appendix = '/?__a=1';
   Uri uri = Uri.parse(baseUrl + username + appendix);
   // print(uri.toString());
-  return await request(uri);
+  Map<String, dynamic> data = (await request(uri))['graphql']['user'];
+  ProfileModel returnData = ProfileModel(
+    username: data['username'],
+    fullName: data['full_name'],
+    bio: data['biography'],
+    profilePicUrl: data['profile_pic_url'],
+    websiteUrl: data['external_url'],
+    followerCount: data['edge_followed_by']['count'],
+    followingCount: data['edge_follow']['count'],
+    postCount: data['edge_owner_to_timeline_media']['count'],
+    imageList: [],
+    videoList: [],
+  );
+
+  for (Map<String, dynamic> media in data['edge_owner_to_timeline_media']
+      ['edges']) {
+    if (media['node']['is_video']) {
+      returnData.videoList.add(VideoModel(
+        mediaUrl: media['node']['video_url'],
+        caption: media['node']['edge_media_to_caption']['edges'][0]['node']
+            ['text'],
+        datePosted: DateFormat('dd/MM/yyyy, HH:mm').format(
+            DateTime.fromMillisecondsSinceEpoch(
+                media['node']['taken_at_timestamp'] * 1000)),
+        likeCount: media['node']['edge_liked_by']['count'],
+        commentCount: media['node']['edge_media_to_comment']['count'],
+        views: media['node']['video_view_count'],
+      ));
+    } else {
+      returnData.imageList.add(ImageModel(
+        mediaUrl: media['node']['display_url'],
+        caption: media['node']['edge_media_to_caption']['edges'][0]['node']
+            ['text'],
+        datePosted: DateTime.fromMillisecondsSinceEpoch(
+                media['node']['taken_at_timestamp'] * 1000)
+            .toIso8601String(),
+        likeCount: media['node']['edge_liked_by']['count'],
+        commentCount: media['node']['edge_media_to_comment']['count'],
+      ));
+    }
+  }
+
+  return returnData;
 }
 
 Future<SearchResultsModel> getSearchResult(String searchString) async {

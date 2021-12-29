@@ -1,6 +1,7 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:igstats/services/ig_api.dart';
 import 'package:igstats/services/models.dart';
 import 'package:video_player/video_player.dart';
 
@@ -46,6 +47,7 @@ class ProfileController extends GetxController {
       ]).obs;
 
   TextEditingController usernameController = TextEditingController();
+  RxBool isException = false.obs;
 
   List<VideoPlayerController> _videoControllers = [];
   List<ChewieController> _chewieControllers = [];
@@ -67,6 +69,12 @@ class ProfileController extends GetxController {
 
   void openProfile() async {
     closeVideoControllers();
+    isException.value = false;
+    try {
+      profile.value = await getProfileData(usernameController.text);
+    } catch (e) {
+      isException.value = true;
+    }
   }
 
   Future<ChewieController> loadVideo(String url) async {
