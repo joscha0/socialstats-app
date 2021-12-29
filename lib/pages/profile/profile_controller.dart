@@ -50,6 +50,7 @@ class ProfileController extends GetxController {
 
   TextEditingController usernameController = TextEditingController();
   RxBool isException = false.obs;
+  RxBool showProfile = true.obs;
 
   late VideoPlayerController videoPlayerController;
   late ChewieController chewieController;

@@ -52,89 +52,92 @@ class ProfilePage extends GetView<ProfileController> {
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(300),
-                          child: Image.network(c.profile.value.profilePicUrl),
+                if (c.showProfile.value) ...[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(300),
+                            child: Image.network(c.profile.value.profilePicUrl),
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              c.profile.value.username,
-                              style: const TextStyle(
-                                fontSize: 24,
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  children: [
-                                    Text(
-                                      '${c.profile.value.postCount}',
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                                    const Text('posts'),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      '${c.profile.value.followerCount}',
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                                    const Text('followers'),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      '${c.profile.value.followingCount}',
-                                      style: const TextStyle(fontSize: 16),
-                                    ),
-                                    const Text('following'),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                c.profile.value.fullName,
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                c.profile.value.username,
                                 style: const TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 24,
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(c.profile.value.bio),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                c.profile.value.websiteUrl,
-                                style: const TextStyle(fontSize: 16),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Text(
+                                        '${c.profile.value.postCount}',
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                      const Text('posts'),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        '${c.profile.value.followerCount}',
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                      const Text('followers'),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        '${c.profile.value.followingCount}',
+                                        style: const TextStyle(fontSize: 16),
+                                      ),
+                                      const Text('following'),
+                                    ],
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  c.profile.value.fullName,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(c.profile.value.bio),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  c.profile.value.websiteUrl,
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  ],
-                ),
+                      )
+                    ],
+                  ),
+                ],
                 Expanded(
                   child: DefaultTabController(
                       length: 2,
@@ -142,19 +145,34 @@ class ProfilePage extends GetView<ProfileController> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.fromLTRB(32, 0, 32, 8),
-                            child: TabBar(
-                              tabs: const [
-                                Tab(text: 'images'),
-                                Tab(text: 'videos'),
-                              ],
-                              labelColor: Colors.black,
-                              labelStyle:
-                                  GoogleFonts.bangersTextTheme().subtitle1,
-                              indicator: BoxDecoration(
-                                  border: Border.all(
-                                    width: 2,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: TabBar(
+                                    tabs: const [
+                                      Tab(text: 'images'),
+                                      Tab(text: 'videos'),
+                                    ],
+                                    labelColor: Colors.black,
+                                    labelStyle: GoogleFonts.bangersTextTheme()
+                                        .subtitle1,
+                                    indicator: BoxDecoration(
+                                        border: Border.all(
+                                          width: 2,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(32)),
                                   ),
-                                  borderRadius: BorderRadius.circular(32)),
+                                ),
+                                ExpandIcon(
+                                  onPressed: (value) {
+                                    c.showProfile.value = !c.showProfile.value;
+                                  },
+                                  isExpanded: c.showProfile.value,
+                                  size: 32,
+                                  color: Colors.black,
+                                ),
+                              ],
                             ),
                           ),
                           Expanded(
