@@ -102,8 +102,11 @@ class SearchPage extends GetView<SearchController> {
                                         child: ListTile(
                                           title: Text(user.username),
                                           subtitle: Text(user.fullName),
-                                          leading:
-                                              Image.network(user.profilePicUrl),
+                                          leading: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              child: Image.network(
+                                                  user.profilePicUrl)),
                                           onTap: () {},
                                           contentPadding:
                                               const EdgeInsets.only(left: 24),
