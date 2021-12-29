@@ -14,13 +14,14 @@ Future<ProfileModel> getProfileData(String username) async {
   Map<String, dynamic> data = (await request(uri))['graphql']['user'];
   ProfileModel returnData = ProfileModel(
     username: data['username'],
-    fullName: data['full_name'],
-    bio: data['biography'],
-    profilePicUrl: data['profile_pic_url'],
-    websiteUrl: data['external_url'],
-    followerCount: data['edge_followed_by']['count'],
-    followingCount: data['edge_follow']['count'],
-    postCount: data['edge_owner_to_timeline_media']['count'],
+    fullName: data['full_name'] ?? '',
+    bio: data['biography'] ?? '',
+    profilePicUrl: data['profile_pic_url'] ??
+        'https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg',
+    websiteUrl: data['external_url'] ?? '',
+    followerCount: data['edge_followed_by']['count'] ?? 0,
+    followingCount: data['edge_follow']['count'] ?? 0,
+    postCount: data['edge_owner_to_timeline_media']['count'] ?? 0,
     imageList: [],
     videoList: [],
   );
@@ -45,9 +46,9 @@ Future<ProfileModel> getProfileData(String username) async {
         mediaUrl: media['node']['display_url'],
         caption: media['node']['edge_media_to_caption']['edges'][0]['node']
             ['text'],
-        datePosted: DateTime.fromMillisecondsSinceEpoch(
-                media['node']['taken_at_timestamp'] * 1000)
-            .toIso8601String(),
+        datePosted: DateFormat('dd/MM/yyyy, HH:mm').format(
+            DateTime.fromMillisecondsSinceEpoch(
+                media['node']['taken_at_timestamp'] * 1000)),
         likeCount: media['node']['edge_liked_by']['count'],
         commentCount: media['node']['edge_media_to_comment']['count'],
       ));
