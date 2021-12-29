@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.igstats">
+    <uses-permission android:name="android.permission.INTERNET"/>
+
    <application
         android:label="igstats"
         android:name="${applicationName}"
