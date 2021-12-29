@@ -38,7 +38,7 @@ Future<SearchResultsModel> getSearchResult(String searchString) async {
     returnData.places.add(SearchPlaceModel(
       title: place['place']['title'],
       subtitle: place['place']['subtitle'],
-      id: place['place']['location']['facebook_place_id'],
+      id: place['place']['location']['facebook_places_id'],
     ));
   }
 
@@ -67,6 +67,7 @@ Future<Map<String, dynamic>> request(Uri uri) async {
   if (response.statusCode == 200) {
     if (response.body.startsWith('<!DOCTYPE html>')) {
       log('Instagram request limit reached');
+      throw Exception('Instagram request limit reached');
     } else {
       data = jsonDecode(utf8.decode(response.bodyBytes));
     }
