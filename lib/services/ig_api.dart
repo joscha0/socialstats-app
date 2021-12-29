@@ -38,6 +38,7 @@ Future<ProfileModel> getProfileData(String username) async {
         likeCount: media['node']['edge_liked_by']['count'],
         commentCount: media['node']['edge_media_to_comment']['count'],
         views: media['node']['video_view_count'],
+        previewImgUrl: media['node']['thumbnail_src'],
       ));
     } else {
       returnData.imageList.add(ImageModel(

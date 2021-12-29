@@ -106,6 +106,7 @@ class ImageModel extends MediaModel {
 
 class VideoModel extends MediaModel {
   late int views;
+  late String previewImgUrl;
 
   VideoModel(
       {required mediaUrl,
@@ -113,7 +114,8 @@ class VideoModel extends MediaModel {
       required datePosted,
       required likeCount,
       required commentCount,
-      required this.views})
+      required this.views,
+      required this.previewImgUrl})
       : super(
           mediaUrl: mediaUrl,
           caption: caption,
