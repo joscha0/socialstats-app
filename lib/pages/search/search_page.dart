@@ -36,6 +36,7 @@ class SearchPage extends GetView<SearchController> {
                     children: [
                       Expanded(
                         child: TextFormField(
+                          controller: c.searchController,
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius:
@@ -50,7 +51,7 @@ class SearchPage extends GetView<SearchController> {
                         width: 8,
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: c.search,
                         child: const Padding(
                           padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
                           child: Icon(Icons.search),
@@ -59,72 +60,136 @@ class SearchPage extends GetView<SearchController> {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: DefaultTabController(
-                      length: 3,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(32, 0, 32, 8),
-                            child: TabBar(
-                              tabs: const [
-                                Tab(text: 'users'),
-                                Tab(text: 'places'),
-                                Tab(text: 'hashtags'),
-                              ],
-                              labelColor: Colors.black,
-                              labelStyle:
-                                  GoogleFonts.bangersTextTheme().subtitle1,
-                              indicator: BoxDecoration(
-                                  border: Border.all(
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(32)),
+                if (!c.isException.value) ...[
+                  Expanded(
+                    child: DefaultTabController(
+                        length: 3,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(32, 0, 32, 8),
+                              child: TabBar(
+                                tabs: const [
+                                  Tab(text: 'users'),
+                                  Tab(text: 'places'),
+                                  Tab(text: 'hashtags'),
+                                ],
+                                labelColor: Colors.black,
+                                labelStyle:
+                                    GoogleFonts.bangersTextTheme().subtitle1,
+                                indicator: BoxDecoration(
+                                    border: Border.all(
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(32)),
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: TabBarView(children: [
-                              ListView.builder(
-                                itemCount: c.searchResults.value.users.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  SearchUserModel user =
-                                      c.searchResults.value.users[index];
-                                  return Padding(
-                                    padding: const EdgeInsets.only(bottom: 8),
-                                    child: Container(
-                                      decoration: const BoxDecoration(
-                                        border: Border(
-                                          top: BorderSide(
-                                            width: 2.0,
-                                          ),
-                                          bottom: BorderSide(
-                                            width: 2.0,
-                                          ),
-                                        ),
-                                      ),
-                                      child: ListTile(
-                                        title: Text(user.username),
-                                        subtitle: Text(user.fullName),
-                                        // leading: Image.network(user.profilePicUrl),
-                                        tileColor: Colors.black12,
-
-                                        onTap: () {},
-
+                            Expanded(
+                              child: TabBarView(children: [
+                                ListView.builder(
+                                  itemCount: c.searchResults.value.users.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    SearchUserModel user =
+                                        c.searchResults.value.users[index];
+                                    return Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          24, 4, 24, 4),
+                                      child: Card(
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(32)),
+                                        child: ListTile(
+                                          title: Text(user.username),
+                                          subtitle: Text(user.fullName),
+                                          leading:
+                                              Image.network(user.profilePicUrl),
+                                          onTap: () {},
+                                          contentPadding:
+                                              const EdgeInsets.only(left: 24),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(32)),
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
-                              ),
-                              Text('places'),
-                              Text('hashtags'),
-                            ]),
-                          )
-                        ],
-                      )),
-                )
+                                    );
+                                  },
+                                ),
+                                ListView.builder(
+                                  itemCount:
+                                      c.searchResults.value.places.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    SearchPlaceModel place =
+                                        c.searchResults.value.places[index];
+                                    return Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          24, 4, 24, 4),
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(32)),
+                                        child: ListTile(
+                                          title: Text(place.title),
+                                          subtitle: Text(place.subtitle),
+                                          leading: const Icon(
+                                            Icons.place,
+                                            size: 35,
+                                            color: Colors.black,
+                                          ),
+                                          onTap: () {},
+                                          contentPadding:
+                                              const EdgeInsets.only(left: 24),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(32)),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                                ListView.builder(
+                                  itemCount:
+                                      c.searchResults.value.hashtags.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    SearchHashtagModel hashtag =
+                                        c.searchResults.value.hashtags[index];
+                                    return Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          24, 4, 24, 4),
+                                      child: Card(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(32)),
+                                        child: ListTile(
+                                          title: Text(hashtag.name),
+                                          subtitle: Text(hashtag.subtitle),
+                                          leading: const Text(
+                                            '#',
+                                            style: TextStyle(fontSize: 35),
+                                          ),
+                                          onTap: () {},
+                                          contentPadding:
+                                              const EdgeInsets.only(left: 24),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(32)),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ]),
+                            )
+                          ],
+                        )),
+                  )
+                ] else ...[
+                  const Center(
+                    child: Text('Instagram request limit reached'),
+                  )
+                ]
               ],
             ),
           );
