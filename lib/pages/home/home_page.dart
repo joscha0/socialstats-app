@@ -16,13 +16,13 @@ class HomePage extends GetView<HomeController> {
           return Scaffold(
             body: IndexedStack(
               index: c.tabIndex.value,
-              children: [
-                SearchPage(),
-                ProfilePage(),
+              children: const [
+                SearchTab(),
+                ProfileTab(),
               ],
             ),
             bottomNavigationBar: BottomNavigationBar(
-              onTap: (value) => c.tabIndex.value = value,
+              onTap: (value) => c.switchTab(value),
               currentIndex: c.tabIndex.value,
               backgroundColor: Colors.black,
               selectedItemColor: Colors.white,
@@ -44,4 +44,44 @@ class HomePage extends GetView<HomeController> {
     return BottomNavigationBarItem(
         icon: const Icon(Icons.ac_unit), label: label);
   }
+}
+
+class ProfileTab extends StatefulWidget {
+  const ProfileTab({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<ProfileTab> createState() => _ProfileTabState();
+}
+
+class _ProfileTabState extends State<ProfileTab>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  Widget build(BuildContext context) {
+    return const ProfilePage();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+}
+
+class SearchTab extends StatefulWidget {
+  const SearchTab({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<SearchTab> createState() => _SearchTabState();
+}
+
+class _SearchTabState extends State<SearchTab>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  Widget build(BuildContext context) {
+    return const SearchPage();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
 }
