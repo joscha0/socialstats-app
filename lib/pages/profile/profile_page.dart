@@ -71,19 +71,64 @@ class ProfilePage extends GetView<ProfileController> {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            Text(c.profile.value.username),
+                            Text(
+                              c.profile.value.username,
+                              style: const TextStyle(
+                                fontSize: 24,
+                              ),
+                            ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Text('${c.profile.value.postCount} posts'),
-                                Text(
-                                    '${c.profile.value.followerCount} followers'),
-                                Text(
-                                    '${c.profile.value.followingCount} following'),
+                                Column(
+                                  children: [
+                                    Text(
+                                      '${c.profile.value.postCount}',
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                    const Text('posts'),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      '${c.profile.value.followerCount}',
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                    const Text('followers'),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      '${c.profile.value.followingCount}',
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                    const Text('following'),
+                                  ],
+                                ),
                               ],
                             ),
-                            Text(c.profile.value.fullName),
-                            Text(c.profile.value.bio),
-                            Text(c.profile.value.websiteUrl),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                c.profile.value.fullName,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(c.profile.value.bio),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                c.profile.value.websiteUrl,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -156,18 +201,46 @@ class _ImagesTabState extends State<ImagesTab>
                 children: [
                   Expanded(child: Image.network(image.mediaUrl)),
                   Expanded(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('${image.likeCount} likes'),
-                            Text('${image.commentCount} comments'),
-                          ],
-                        ),
-                        Text(image.datePosted),
-                        Text(image.caption),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    '${image.likeCount}',
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                  const Text('likes'),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    '${image.commentCount}',
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                  const Text('comments'),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              image.datePosted,
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(image.caption),
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],
@@ -210,19 +283,55 @@ class _VideosTabState extends State<VideosTab>
                 children: [
                   Expanded(child: MyVideoPlayer(video: video, index: index)),
                   Expanded(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('${video.views} views'),
-                            Text('${video.likeCount} likes'),
-                            Text('${video.commentCount} comments'),
-                          ],
-                        ),
-                        Text(video.datePosted),
-                        Text(video.caption),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    '${video.views}',
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                  const Text('views'),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    '${video.likeCount}',
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                  const Text('likes'),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    '${video.commentCount}',
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                  const Text('comments'),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              video.datePosted,
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(video.caption),
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],

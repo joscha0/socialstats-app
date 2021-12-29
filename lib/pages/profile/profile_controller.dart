@@ -13,9 +13,9 @@ class ProfileController extends GetxController {
       profilePicUrl:
           "https://scontent-muc2-1.cdninstagram.com/v/t51.2885-19/s150x150/103280599_561183587922801_1306027535501666726_n.jpg?_nc_ht=scontent-muc2-1.cdninstagram.com&_nc_cat=1&_nc_ohc=PI2lGGBbNyEAX-AkKEo&tn=XqfqS9R8NKUacHO8&edm=ABfd0MgBAAAA&ccb=7-4&oh=00_AT9OHzUhp0iZLk20czhlhJ6HBBbuoaeTtwKRSjnsPrAUmg&oe=61D292A7&_nc_sid=7bff83",
       websiteUrl: "websiteUrl",
-      followerCount: 123,
-      followingCount: 123,
-      postCount: 123,
+      followerCount: 12323,
+      followingCount: 122353,
+      postCount: 12233,
       imageList: [
         ImageModel(
             mediaUrl:
