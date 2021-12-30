@@ -52,7 +52,8 @@ class ProfileController extends GetxController {
   RxBool isException = false.obs;
   RxBool showProfile = true.obs;
 
-  late VideoPlayerController videoPlayerController;
+  VideoPlayerController videoPlayerController =
+      VideoPlayerController.network('');
   late ChewieController chewieController;
   Rx<List<bool>> videosLoaded = Rx<List<bool>>([false, false]);
 
@@ -88,6 +89,10 @@ class ProfileController extends GetxController {
   }
 
   void loadVideoIndex(int index) {
+    if (videoPlayerController.value.isInitialized &&
+        chewieController.isPlaying) {
+      chewieController.pause();
+    }
     videosLoaded.value = List.filled(profile.value.videoList.length, false);
     videosLoaded.value[index] = true;
     update();
