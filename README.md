@@ -25,7 +25,6 @@ The only downside of this approach is that sometimes if you use the app too much
 \* This app is not affiliated with Instagram
 
 <p align="middle">
-  <img src="https://i.postimg.cc/0ygwHVmj/Screenshot-20211230-200100.jpg" width="25%" />
   <img src="https://i.postimg.cc/cLZRXdV6/Screenshot-20211230-200207.jpg" width="25%" /> 
   <img src="https://i.postimg.cc/T3q96Krr/Screenshot-20211230-200259.jpg" width="25%" />
 </p>
