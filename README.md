@@ -1,11 +1,9 @@
-<img src="https://i.postimg.cc/g0W3rgkQ/play-store-feature-graphic.png" width=400>
-
-# IG stats
+# social stats
 
 > Find and analyze Instagram accounts without needing to login!
 
 
-IG stats is an Instagram analysis tool that lets you search for users, places and hashtags. The app also lets you view a profile page and the statistics to the profile e.g. followers, followings, posts, and information about the postings.
+Social stats is an Instagram analysis tool that lets you search for users, places and hashtags. The app also lets you view a profile page and the statistics to the profile e.g. followers, followings, posts, and information about the postings.
 
 In the background, the app uses the public Instagram API.
 
@@ -26,6 +24,5 @@ The only downside of this approach is that sometimes if you use the app too much
 
 <p align="middle">
   <img src="https://i.postimg.cc/cLZRXdV6/Screenshot-20211230-200207.jpg" width="25%" /> 
-  <img src="https://i.postimg.cc/T3q96Krr/Screenshot-20211230-200259.jpg" width="25%" />
 </p>
 
