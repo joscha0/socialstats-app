@@ -2,13 +2,6 @@
 
 # IG stats
 
-<p>
-    <a  href='https://play.google.com/store/apps/details?id=com.joscha0.igstats' target="_blank"><img width="128" alt='Get it on Google Play' src='https://i.postimg.cc/FFV0j8Q9/google-play.png'/></a>
-    <a></a>
-                        <a target="_blank" href="https://igstats.960.eu/#/"><img width="128" alt='Launch now as Web App'  src='https://i.postimg.cc/tRBHnR7p/pwa.png'/></a>                        
- </p>
-
-
 > Find and analyze Instagram accounts without needing to login!
 
 
